@@ -3,12 +3,16 @@ package com.community.demo.controller;
 
 import com.community.demo.Mapper.UserMapper;
 import com.community.demo.Model.User;
+import com.community.demo.dto.QuestionDTO;
+import com.community.demo.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -18,6 +22,8 @@ public class IndexController {
     }
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private ListService listService;
     @GetMapping("index")
     public String index2(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
@@ -33,8 +39,9 @@ public class IndexController {
                 break;
             }
         }
-
-
+        List<QuestionDTO> questionDTOList=new ArrayList<>();
+        questionDTOList=listService.List();
+        System.out.println("questionDTOLIst: "+ questionDTOList.toString());
         return "index";
     }
 

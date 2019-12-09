@@ -1,9 +1,10 @@
-package com.community.demo.Model;
+package com.community.demo.dto;
 
+import com.community.demo.Model.User;
 import lombok.Data;
 
 @Data
-public class Quesion {
+public class QuestionDTO {
     private int id;
     private String title;
     private String description;
@@ -14,5 +15,5 @@ public class Quesion {
     private int view_count;
     private int like_count;
     private String tag;
-
+    private User user;
 }

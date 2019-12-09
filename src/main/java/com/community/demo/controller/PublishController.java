@@ -3,7 +3,7 @@ package com.community.demo.controller;
 
 import com.community.demo.Mapper.QuestionMapper;
 import com.community.demo.Mapper.UserMapper;
-import com.community.demo.Model.Quesion;
+import com.community.demo.Model.Question;
 import com.community.demo.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +49,7 @@ public class PublishController {
             return "publish";
         }
 
-        Quesion quesion = new Quesion();
+        Question quesion = new Question();
         quesion.setTitle(title);
         quesion.setDescription(description);
         quesion.setTag(tag);
