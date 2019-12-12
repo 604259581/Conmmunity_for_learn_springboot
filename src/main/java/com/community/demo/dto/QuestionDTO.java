@@ -4,7 +4,8 @@ import com.community.demo.Model.User;
 import lombok.Data;
 
 @Data
-public class QuestionDTO {
+public class
+QuestionDTO {
     private int id;
     private String title;
     private String description;

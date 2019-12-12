@@ -3,6 +3,7 @@ package com.community.demo.Mapper;
 import com.community.demo.Model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -14,7 +15,9 @@ public interface QuestionMapper {
     public void  create(Question quesion);
 
 
-    @Select("select * from question")
-    public List<Question> selectList();
+    @Select("select * from question limit #{offset},#{size}")
+    public List<Question> selectList(@Param("offset") int offset, @Param("size") int size);
 
+    @Select("select count(1) from question")
+    public int selectCount();
 }

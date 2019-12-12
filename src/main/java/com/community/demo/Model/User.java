@@ -10,13 +10,5 @@ public class User {
     private String TOKEN;
     private Long GMTCREATE;
     private Long GMTMODIFIED;
-    private String pircture;
-    public User(){}
-    public User(String NAME,String ACCOUNTID,String TOKEN,Long GMTCREATE,Long GMTMODIFIED){
-        this.GMTCREATE=GMTCREATE;
-        this.GMTMODIFIED = GMTMODIFIED;
-        this.ACCOUNTID=ACCOUNTID;
-        this.TOKEN=TOKEN;
-        this.NAME=NAME;
-    }
+    private String picture;
 }
