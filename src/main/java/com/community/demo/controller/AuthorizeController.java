@@ -44,7 +44,7 @@ public class AuthorizeController {
         acessTokenDTO.setState(state);
        // System.out.println("code："+code+"  state="+state);
         //String accessToken=githubProvider.getAccessToken(acessTokenDTO);
-        GithubUser user=githubProvider.getUserMessage("4b63189c0e5e49b9b40393bc793d683c4eab9051");
+        GithubUser user=githubProvider.getUserMessage("7fe5c9aec96f3e0506e8aea3c91e98e71bf6bc3a");
         System.out.println(user);
         if(user!=null){
             String token = UUID.randomUUID().toString();
@@ -63,9 +63,9 @@ public class AuthorizeController {
             //这里不用自己设置session是因为框架thymeleaf会自动注入session，session的value是随机的
             //request.getSession().setAttribute("user",user);
             //redirect:将值全去掉，重新加载地址；
-            return "redirect:index";
+            return "redirect:/";
         }else{
-            return "redirect:index";
+            return "redirect:/";
         }
 
     }
