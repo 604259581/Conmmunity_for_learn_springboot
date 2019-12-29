@@ -5,6 +5,7 @@ import com.community.demo.Model.User;
 import com.community.demo.dto.AcessTokenDTO;
 import com.community.demo.dto.GithubUser;
 import com.community.demo.provider.GuihubProvider;
+import com.community.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -31,10 +32,10 @@ public class AuthorizeController {
     @Value("${GitHub.setRedirect_uri}")
     private String uri;
     @Autowired
-    private UserMapper userMapper; //这是一个idea的bug，自动注入mapper会报错
+    private UserService userService;
     @GetMapping("/callback")
-    public String callback(@RequestParam(name="code") String code,
-                           @RequestParam(name="state")String state,
+    public String callback(@RequestParam(name = "code") String code,
+                           @RequestParam(name = "state") String state,
                            HttpServletResponse response) {
         AcessTokenDTO acessTokenDTO = new AcessTokenDTO();
         acessTokenDTO.setClient_id(clientid);
@@ -42,31 +43,40 @@ public class AuthorizeController {
         acessTokenDTO.setCode(code);
         acessTokenDTO.setRedirect_uri(uri);
         acessTokenDTO.setState(state);
-       // System.out.println("code："+code+"  state="+state);
+        // System.out.println("code："+code+"  state="+state);
         //String accessToken=githubProvider.getAccessToken(acessTokenDTO);
-        GithubUser user=githubProvider.getUserMessage("7fe5c9aec96f3e0506e8aea3c91e98e71bf6bc3a");
+        GithubUser user = githubProvider.getUserMessage("57f10a107459e2a8a582990c32797584548dfad0");
         System.out.println(user);
-        if(user!=null){
+        if (user != null) {
             String token = UUID.randomUUID().toString();
             User user_2 = new User();
             user_2.setNAME(user.getName());
             user_2.setACCOUNTID(String.valueOf(user.getId()));
             user_2.setTOKEN(token);
-            user_2.setGMTCREATE(System.currentTimeMillis());
-            user_2.setGMTMODIFIED(System.currentTimeMillis());
             user_2.setPicture(user.getAvatar_url());
-            System.out.println("user_2: "+user_2);
-            userMapper.insert(user_2);
-            response.addCookie(new Cookie("token",token));
+            userService.createOrUpdate(user_2);
+            System.out.println("user_2: " + user_2);
+            response.addCookie(new Cookie("token", token));
             //登录成功，建立session
             //thymeleaf就是一个模板引擎，作用就是将非常简单的方法把后端数据给前端使用。
             //这里不用自己设置session是因为框架thymeleaf会自动注入session，session的value是随机的
             //request.getSession().setAttribute("user",user);
             //redirect:将值全去掉，重新加载地址；
             return "redirect:/";
-        }else{
+        } else {
             return "redirect:/";
         }
 
     }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request,HttpServletResponse response){
+        request.getSession().removeAttribute("user");
+        Cookie cookie = new Cookie("token",null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        return "redirect:/";
+    }
+
+
+
 }

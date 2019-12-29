@@ -17,7 +17,7 @@ public class PageDTO {
     private List<Integer> pages=new ArrayList<>();
 
     public void setPagination(int totalCount, int page, int size) {
-        if(totalCount%size==0){
+        if(totalCount%size==0 && totalCount!=0){
             totalPage=totalCount/size;
         }else{
             totalPage=totalCount/size+1;
@@ -37,9 +37,9 @@ public class PageDTO {
 
         //是否展示上一页
         if(page==1){
-            showNext=false;
+            showPrevious=false;
         }else{
-            showNext=true;
+            showPrevious=true;
         }
         //是否展示下一页
         if(page==totalPage){

@@ -1,10 +1,7 @@
 package com.community.demo.Mapper;
 
 import com.community.demo.Model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -17,23 +14,9 @@ public interface UserMapper {
     @Select("select * from user where ID=#{ID}")
     User findByID(@Param("ID") int ID );
 
-//    @Select("select ID from user where token=#{token}")
-//    int  findByID(@Param("token") String token);
-//
-//    @Select("select ACCOUNTID from user where token=#{token}")
-//    String  findByACCID(@Param("token") String token);
-//
-//    @Select("select name from user where token=#{token}")
-//    String  findByName(@Param("token") String token);
-//
-//    @Select("select token from user where token=#{token}")
-//    String  findByToken(@Param("token") String token);
-//
-//    @Select("select GMTCREATE from user where token=#{token}")
-//    long  findByGmtCreate(@Param("token") String token);
-//
-//    @Select("select GMTMODIFIED from user where token=#{token}")
-//    long  findByModified(@Param("token") String token);
+    @Select("select * from user where accountid=#{accountid}")
+    User findByAccountID(@Param("accountid") String accountid);
 
-
+    @Update("update user set name=#{NAME},token=#{TOKEN},gmtModified=#{GMTMODIFIED},gmtCreate=#{GMTCREATE} where id=#{ID}")
+    void update(User dbUser);
 }
