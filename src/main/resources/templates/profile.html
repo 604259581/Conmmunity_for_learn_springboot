@@ -25,9 +25,11 @@
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                    <h4 class="media-heading" >
+                        <a th:href="@{'/question/'+${question.id}}" th:text="${question.getTitle()}"></a>
+                    </h4>
                     <span th:text="${question.getDescription()}"></span><br>
-                    <span class="text-desc"><span th:text="${question.getComment_count()}"></span>个评论 • <span th:text="${question.getView_count()}"></span>次浏览 • <span th:text="${#dates.format(question.getGmt_create(),'yyyy MMMM dd')}"></span></span>
+                    <span class="text-desc"><span th:text="${question.getCommentCount()}"></span>个评论 • <span th:text="${question.getViewCount()}"></span>次浏览 • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy MMMM dd')}"></span></span>
                 </div>
             </div>
             <nav aria-label="Page navigation">

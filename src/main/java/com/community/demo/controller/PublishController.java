@@ -1,7 +1,7 @@
 package com.community.demo.controller;
 
 
-import com.community.demo.Mapper.QuestionMapper2;
+import com.community.demo.Mapper.QuestionMapper;
 import com.community.demo.Model.Question;
 import com.community.demo.Model.User;
 import com.community.demo.service.QuestionService;
@@ -21,7 +21,7 @@ public class PublishController {
     private QuestionService questionService;
 
     @Autowired
-    private QuestionMapper2 questionMapper2;
+    private QuestionMapper questionMapper;
 
 
     @GetMapping("/publish")
@@ -31,7 +31,7 @@ public class PublishController {
 
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable(name="id") int id,Model model){
-        Question question = questionMapper2.getByID(id);
+        Question question = questionMapper.selectByPrimaryKey(id);
         model.addAttribute("title", question.getTitle());
         model.addAttribute("description", question.getDescription());
         model.addAttribute("tag", question.getTag());
@@ -72,7 +72,7 @@ public class PublishController {
         if (user == null) {
             return "redirect:/";
         }
-        quesion.setCreator(user.getID());
+        quesion.setCreator(user.getId());
 
         System.out.println("quesion: " + quesion.toString());
         quesion.setId(id);

@@ -9,12 +9,12 @@ QuestionDTO {
     private int id;
     private String title;
     private String description;
-    private long gmt_create;
-    private long gmt_modified;
+    private long gmtCreate;
+    private long gmtModified;
     private int creator;
-    private int comment_count;
-    private int view_count;
-    private int like_count;
+    private int commentCount;
+    private int viewCount;
+    private int likeCount;
     private String tag;
     private User user;
 }

@@ -15,14 +15,14 @@
     <div class="row">
         <div class="col-xs-12 col-md-12 col-sm-12 col-lg-9" >
             <h3 th:text="${quetion.getTitle()}"></h3>
-            <span class="text-desc">阅读数：<span th:text="${quetion.getView_count()}"></span><br>
-                发布时间：<span th:text="${#dates.format(quetion.getGmt_create(),'yyyy-MM-dd HH:mm')}"></span><br>
-                作者：<span th:text="${quetion.user.getNAME()}"></span><br>
+            <span class="text-desc">阅读数：<span th:text="${quetion.getViewCount()}"></span><br>
+                发布时间：<span th:text="${#dates.format(quetion.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span><br>
+                作者：<span th:text="${quetion.user.getName()}"></span><br>
             </span>
             <hr>
             <div classs="col-xs-12 col-md-12 col-sm-12 col-lg-12" th:text="${quetion.getDescription()}"></div>
             <hr classs="col-xs-12 col-md-12 col-sm-12 col-lg-12">
-            <a th:href="@{'/publish/'+${quetion.getId()}}" class="community-menu" th:if="${session.user != null && session.user.getID()==quetion.creator}">
+            <a th:href="@{'/publish/'+${quetion.getId()}}" class="community-menu" th:if="${session.user != null && session.user.getId()==quetion.creator}">
                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 编辑
             </a>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="media-body">
                             <h6 class="media-heading">
-                                <span th:text="${quetion.user.getNAME()}"></span>
+                                <span th:text="${quetion.user.getName()}"></span>
                             </h6>
 
                     </div>

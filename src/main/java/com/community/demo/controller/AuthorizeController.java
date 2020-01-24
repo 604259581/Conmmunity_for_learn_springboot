@@ -45,14 +45,14 @@ public class AuthorizeController {
         acessTokenDTO.setState(state);
         // System.out.println("code："+code+"  state="+state);
         //String accessToken=githubProvider.getAccessToken(acessTokenDTO);
-        GithubUser user = githubProvider.getUserMessage("57f10a107459e2a8a582990c32797584548dfad0");
+        GithubUser user = githubProvider.getUserMessage("d9b8f32224acc06c6bbb881c1d4b3758dd06ff6b");
         System.out.println(user);
         if (user != null) {
             String token = UUID.randomUUID().toString();
             User user_2 = new User();
-            user_2.setNAME(user.getName());
-            user_2.setACCOUNTID(String.valueOf(user.getId()));
-            user_2.setTOKEN(token);
+            user_2.setName(user.getName());
+            user_2.setAccountid(String.valueOf(user.getId()));
+            user_2.setToken(token);
             user_2.setPicture(user.getAvatar_url());
             userService.createOrUpdate(user_2);
             System.out.println("user_2: " + user_2);

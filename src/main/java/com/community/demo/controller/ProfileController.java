@@ -39,7 +39,7 @@ public class ProfileController {
             model.addAttribute("section", "replies");
             model.addAttribute("sectionName", "最新回复");
         }
-        PageDTO pageDTO = listService.List(user.getID(), page, size);
+        PageDTO pageDTO = listService.List(user.getId(), page, size);
         model.addAttribute("pageDTO", pageDTO);
         return "profile";
     }
