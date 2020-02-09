@@ -1,7 +1,9 @@
 package com.community.demo.controller;
 
-import com.community.demo.Model.Question;
+import com.community.demo.dto.CommentDTO;
 import com.community.demo.dto.QuestionDTO;
+import com.community.demo.enums.CommentTypeEnum;
+import com.community.demo.service.CommentService;
 import com.community.demo.service.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +17,20 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    ListService listService;
+    private ListService listService;
+    @Autowired
+    private CommentService commentService;
     @GetMapping("/question/{id}")
     public String question(@PathVariable(name="id") int id, Model model){
         listService.incView(id);
         QuestionDTO questionDTO =listService.getByID(id);
+        List<QuestionDTO> selectRelated =listService.selectedRelated(questionDTO);
+        List<CommentDTO> comments = commentService.listByTargetId(id,CommentTypeEnum.QUESTION);
+
         model.addAttribute("quetion",questionDTO);
+        model.addAttribute("comments",comments);
+        model.addAttribute("selectRelated",selectRelated);
         System.out.println(questionDTO);
-        System.out.println("阅读数： "+questionDTO.getViewCount());
         return "question";
     }
 }

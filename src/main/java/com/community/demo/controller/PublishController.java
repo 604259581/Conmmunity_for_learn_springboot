@@ -1,6 +1,5 @@
 package com.community.demo.controller;
 
-
 import com.community.demo.Mapper.QuestionMapper;
 import com.community.demo.Model.Question;
 import com.community.demo.Model.User;
@@ -45,7 +44,8 @@ public class PublishController {
             @RequestParam(value = "title",required = false) String title,
             @RequestParam(value = "description",required =false) String description,
             @RequestParam(value = "tag",required = false) String tag,
-            @RequestParam(value = "id" ,required = false) int id,
+            @RequestParam(value = "id" ,required = false) Integer id,
+            // 这里id一直提示类型错误，暂时还没有找到解决方法。不是很清楚这个id是从那里来的？？
             HttpServletRequest request, Model model) {
 
         model.addAttribute("title", title);
@@ -75,6 +75,7 @@ public class PublishController {
         quesion.setCreator(user.getId());
 
         System.out.println("quesion: " + quesion.toString());
+     //   Integer i = Integer.valueOf(id);
         quesion.setId(id);
         questionService.createOrUpdate(quesion);
 

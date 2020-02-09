@@ -9,7 +9,7 @@ import com.community.demo.dto.PageDTO;
 import com.community.demo.dto.QuestionDTO;
 import com.community.demo.exception.CustomizeErrorCode;
 import com.community.demo.exception.CustomizeException;
-import net.bytebuddy.implementation.bytecode.Throw;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ListService {
@@ -47,7 +48,9 @@ public class ListService {
         }
         int offset = size*(page-1);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-        List<Question> questionList = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+        QuestionExample questionExample =new QuestionExample();
+        questionExample.setOrderByClause("gmt_create desc");
+        List<Question> questionList = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
         int userid;
         for (Question question : questionList) {
             userid = question.getCreator();
@@ -109,5 +112,22 @@ public class ListService {
         User user = userMapper.selectByPrimaryKey(question.getCreator());
         questionDTO.setUser(user);
         return questionDTO;
+    }
+
+    public List<QuestionDTO> selectedRelated(QuestionDTO queryDTO) {
+        if(StringUtils.isBlank(queryDTO.getTag())){
+            return new ArrayList<>();
+        }
+        String tag = queryDTO.getTag().replaceAll(",", "|");
+        Question question = new Question();
+        question.setId(queryDTO.getId());
+        question.setTag(tag);
+        List<Question> questions = questionExtMapper.selectRelated(question);
+        List<QuestionDTO> questionDTOs = questions.stream().map(q -> {
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(q, questionDTO);
+            return questionDTO;
+        }).collect(Collectors.toList());
+        return questionDTOs;
     }
 }

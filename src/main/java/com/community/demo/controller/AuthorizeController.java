@@ -1,6 +1,5 @@
 package com.community.demo.controller;
 
-import com.community.demo.Mapper.UserMapper;
 import com.community.demo.Model.User;
 import com.community.demo.dto.AcessTokenDTO;
 import com.community.demo.dto.GithubUser;
@@ -45,7 +44,7 @@ public class AuthorizeController {
         acessTokenDTO.setState(state);
         // System.out.println("code："+code+"  state="+state);
         //String accessToken=githubProvider.getAccessToken(acessTokenDTO);
-        GithubUser user = githubProvider.getUserMessage("d9b8f32224acc06c6bbb881c1d4b3758dd06ff6b");
+        GithubUser user = githubProvider.getUserMessage("07a8cac97f3242a167240aa36736c2ce68babd55");
         System.out.println(user);
         if (user != null) {
             String token = UUID.randomUUID().toString();
