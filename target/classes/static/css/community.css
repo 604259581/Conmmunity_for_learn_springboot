@@ -52,6 +52,7 @@ body{
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
+
 .sub-comment{
     border-radius: 5px;
     margin-top: 10px;
@@ -61,6 +62,17 @@ body{
 }
 .sub-comment .btn{
     margin:10px 0;
+}
+.publish-tag-tab{
+    display: none;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+.publish-tag-tab .label-info{
+    margin-right: 10px;
+    white-space: normal;
+    display: inline-block;
+    margin: 5px;
 }
 .question-comment{
     margin-top: 0;

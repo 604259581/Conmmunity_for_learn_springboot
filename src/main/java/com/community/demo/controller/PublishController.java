@@ -3,7 +3,9 @@ package com.community.demo.controller;
 import com.community.demo.Mapper.QuestionMapper;
 import com.community.demo.Model.Question;
 import com.community.demo.Model.User;
+import com.community.demo.cache.TagCache;
 import com.community.demo.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.html.HTML;
 
 @Controller
 public class PublishController {
@@ -24,7 +27,8 @@ public class PublishController {
 
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(Model model) {
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -45,12 +49,12 @@ public class PublishController {
             @RequestParam(value = "description",required =false) String description,
             @RequestParam(value = "tag",required = false) String tag,
             @RequestParam(value = "id" ,required = false) Integer id,
-            // 这里id一直提示类型错误，暂时还没有找到解决方法。不是很清楚这个id是从那里来的？？
             HttpServletRequest request, Model model) {
 
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
+        model.addAttribute("tags", TagCache.get());
         if (title == null || title == "") {
             model.addAttribute("error", "标题不能为空");
             return "publish";
@@ -61,6 +65,11 @@ public class PublishController {
         }
         if (tag == null || tag == "") {
             model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+        String filterInvalid = TagCache.filterInvalid(tag);
+        if(StringUtils.isNotBlank(filterInvalid)){
+            model.addAttribute("error", "输入非法标签");
             return "publish";
         }
 
