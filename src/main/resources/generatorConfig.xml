@@ -38,6 +38,8 @@
 		<table tableName="comment"  catalog="student" domainObjectName="Comment" >
 			<property name="ignoreQualifiersAtRuntime" value="true"/>
 		</table>
-
+		<table tableName="notification"  catalog="student" domainObjectName="Notification" >
+			<property name="ignoreQualifiersAtRuntime" value="true"/>
+		</table>
 	</context>
 </generatorConfiguration>

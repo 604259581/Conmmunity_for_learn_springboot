@@ -48,6 +48,7 @@ public class CustomizeExceptionHandler extends ResponseEntityExceptionHandler {
             if (e instanceof CustomizeException) {
                 model.addAttribute("message", e.getMessage());
             } else {
+                System.out.println("没有正确的路径跳转，跳转到了CustimizeException的统一错误处理去了。");
                 model.addAttribute("message",CustomizeErrorCode.SYSTEM_ERROE.getMessage());
             }
             return new ModelAndView("error");

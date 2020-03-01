@@ -19,9 +19,10 @@ public class IndexController {
     @GetMapping("/")
     public String index2(HttpServletRequest request, Model model,
                          @RequestParam(name = "page", defaultValue = "1") int page,
-                         @RequestParam(name = "size", defaultValue = "5") int size
+                         @RequestParam(name = "size", defaultValue = "5") int size,
+                         @RequestParam(name = "search" ,required = false) String search
     ) {
-        PageDTO pageDTO = listService.List(page, size);
+        PageDTO pageDTO = listService.List(page, size,search);
         model.addAttribute("pageDTO", pageDTO);
         System.out.println("pageDTOLIst: " + pageDTO.toString());
         return "index";

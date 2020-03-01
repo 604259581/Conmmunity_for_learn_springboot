@@ -5,6 +5,7 @@ import com.community.demo.dto.AcessTokenDTO;
 import com.community.demo.dto.GithubUser;
 import com.community.demo.provider.GuihubProvider;
 import com.community.demo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.UUID;
  *
  */
 @Controller
+@Slf4j
 public class AuthorizeController {
     @Autowired
     private GuihubProvider githubProvider;
@@ -44,7 +46,7 @@ public class AuthorizeController {
         acessTokenDTO.setState(state);
         // System.out.println("code："+code+"  state="+state);
         //String accessToken=githubProvider.getAccessToken(acessTokenDTO);
-        GithubUser user = githubProvider.getUserMessage("3b0c5dc9bb50e40abf0ea10f2e1a78a86ce9c2ed");
+        GithubUser user = githubProvider.getUserMessage("614f28e2f81a78e8ee3d0b9670b3b34b0d356b50");
         System.out.println(user);
         if (user != null) {
             String token = UUID.randomUUID().toString();
@@ -63,6 +65,7 @@ public class AuthorizeController {
             //redirect:将值全去掉，重新加载地址；
             return "redirect:/";
         } else {
+            log.error("callback get github error,{}", user);
             return "redirect:/";
         }
 

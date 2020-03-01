@@ -7,6 +7,7 @@ import com.community.demo.Model.QuestionExample;
 import com.community.demo.Model.User;
 import com.community.demo.dto.PageDTO;
 import com.community.demo.dto.QuestionDTO;
+import com.community.demo.dto.QuestionQueryDTO;
 import com.community.demo.exception.CustomizeErrorCode;
 import com.community.demo.exception.CustomizeException;
 import org.apache.commons.lang3.StringUtils;
@@ -35,10 +36,16 @@ public class ListService {
         questionExtMapper.incView(question);
     }
 
-    public PageDTO List(int page, int size) {
+    public PageDTO List(int page, int size ,String search) {
+        if(StringUtils.isNotBlank(search)){
+            search = search.replaceAll(" ", "|");
+        }
+        QuestionQueryDTO questionQueryDTO= new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalCount =questionExtMapper.countBySearch(questionQueryDTO);
 
         PageDTO pageDTO=new PageDTO();
-        int totalCount= (int)questionMapper.countByExample(new QuestionExample());
+        //int totalCount= (int)questionMapper.countByExample(new QuestionExample());
         pageDTO.setPagination(totalCount,page,size);
         if(page<1){
             page=1;
@@ -47,10 +54,14 @@ public class ListService {
             page=pageDTO.getTotalPage();
         }
         int offset = size*(page-1);
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
+        List<Question> questionList = questionExtMapper.selectBySearch(questionQueryDTO);
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         QuestionExample questionExample =new QuestionExample();
         questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questionList = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+        //List<Question> questionList = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
         int userid;
         for (Question question : questionList) {
             userid = question.getCreator();
@@ -60,7 +71,7 @@ public class ListService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        pageDTO.setQuestionDTOList(questionDTOList);
+        pageDTO.setData(questionDTOList);
 
 
         return pageDTO;
@@ -95,7 +106,7 @@ public class ListService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        pageDTO.setQuestionDTOList(questionDTOList);
+        pageDTO.setData(questionDTOList);
 
 
         return pageDTO;
