@@ -19,7 +19,7 @@ public enum CommentTypeEnum {
     }
 
     private Integer type;
-        CommentTypeEnum(Integer type){
+    CommentTypeEnum(Integer type){
         this.type=type;
     }
 }

@@ -1,0 +1,24 @@
+2020-03-02 22:21:14.185 DEBUG 13992 --- [http-nio-8080-exec-5] c.c.d.Mapper.UserMapper.selectByExample  : ==> Parameters: 6d237d86-8aac-412b-b0e8-bfc6696340d2(String)
+2020-03-02 22:21:14.194 DEBUG 13992 --- [http-nio-8080-exec-3] c.c.d.Mapper.UserMapper.selectByExample  : <==      Total: 1
+2020-03-02 22:21:14.193 DEBUG 13992 --- [http-nio-8080-exec-10] c.c.d.Mapper.UserMapper.selectByExample  : <==      Total: 1
+2020-03-02 22:21:14.186 DEBUG 13992 --- [http-nio-8080-exec-2] c.c.d.Mapper.UserMapper.selectByExample  : ==> Parameters: 6d237d86-8aac-412b-b0e8-bfc6696340d2(String)
+2020-03-02 22:21:14.238 DEBUG 13992 --- [http-nio-8080-exec-10] c.c.d.M.N.countByExample                 : ==>  Preparing: select count(*) from notification WHERE ( receiver = ? and status = ? ) 
+2020-03-02 22:21:14.256 DEBUG 13992 --- [http-nio-8080-exec-3] c.c.d.M.N.countByExample                 : ==>  Preparing: select count(*) from notification WHERE ( receiver = ? and status = ? ) 
+2020-03-02 22:21:14.257 DEBUG 13992 --- [http-nio-8080-exec-10] c.c.d.M.N.countByExample                 : ==> Parameters: 34(Integer), 0(Integer)
+2020-03-02 22:21:14.259 DEBUG 13992 --- [http-nio-8080-exec-3] c.c.d.M.N.countByExample                 : ==> Parameters: 34(Integer), 0(Integer)
+2020-03-02 22:21:14.266 DEBUG 13992 --- [http-nio-8080-exec-3] c.c.d.M.N.countByExample                 : <==      Total: 1
+2020-03-02 22:21:14.267 DEBUG 13992 --- [http-nio-8080-exec-5] c.c.d.Mapper.UserMapper.selectByExample  : <==      Total: 1
+2020-03-02 22:21:14.267 DEBUG 13992 --- [http-nio-8080-exec-2] c.c.d.Mapper.UserMapper.selectByExample  : <==      Total: 1
+2020-03-02 22:21:14.274 DEBUG 13992 --- [http-nio-8080-exec-5] c.c.d.M.N.countByExample                 : ==>  Preparing: select count(*) from notification WHERE ( receiver = ? and status = ? ) 
+2020-03-02 22:21:14.274 DEBUG 13992 --- [http-nio-8080-exec-5] c.c.d.M.N.countByExample                 : ==> Parameters: 34(Integer), 0(Integer)
+2020-03-02 22:21:14.275 DEBUG 13992 --- [http-nio-8080-exec-2] c.c.d.M.N.countByExample                 : ==>  Preparing: select count(*) from notification WHERE ( receiver = ? and status = ? ) 
+2020-03-02 22:21:14.276 DEBUG 13992 --- [http-nio-8080-exec-2] c.c.d.M.N.countByExample                 : ==> Parameters: 34(Integer), 0(Integer)
+2020-03-02 22:21:14.277 DEBUG 13992 --- [http-nio-8080-exec-10] c.c.d.M.N.countByExample                 : <==      Total: 1
+2020-03-02 22:21:14.278 DEBUG 13992 --- [http-nio-8080-exec-5] c.c.d.M.N.countByExample                 : <==      Total: 1
+2020-03-02 22:21:14.278 DEBUG 13992 --- [http-nio-8080-exec-2] c.c.d.M.N.countByExample                 : <==      Total: 1
+2020-03-02 22:21:14.846 DEBUG 13992 --- [http-nio-8080-exec-4] c.c.d.Mapper.UserMapper.selectByExample  : ==>  Preparing: select ID, ACCOUNTID, NAME, TOKEN, GMTCREATE, GMTMODIFIED, picture from user WHERE ( TOKEN = ? ) 
+2020-03-02 22:21:14.850 DEBUG 13992 --- [http-nio-8080-exec-4] c.c.d.Mapper.UserMapper.selectByExample  : ==> Parameters: 6d237d86-8aac-412b-b0e8-bfc6696340d2(String)
+2020-03-02 22:21:14.864 DEBUG 13992 --- [http-nio-8080-exec-4] c.c.d.Mapper.UserMapper.selectByExample  : <==      Total: 1
+2020-03-02 22:21:14.868 DEBUG 13992 --- [http-nio-8080-exec-4] c.c.d.M.N.countByExample                 : ==>  Preparing: select count(*) from notification WHERE ( receiver = ? and status = ? ) 
+2020-03-02 22:21:14.869 DEBUG 13992 --- [http-nio-8080-exec-4] c.c.d.M.N.countByExample                 : ==> Parameters: 34(Integer), 0(Integer)
+2020-03-02 22:21:14.886 DEBUG 13992 --- [http-nio-8080-exec-4] c.c.d.M.N.countByExample                 : <==      Total: 1
